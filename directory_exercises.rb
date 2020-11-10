@@ -22,6 +22,10 @@ def print_header
   puts "The students of Villains Academy"
   puts "-------------"
 end
+def print_footer(names)
+  puts "Overall, we have #{names.count} great students"
+end
+
 # 1. print students with number in front of name
 def print(students)
   students.each_with_index do |student,index|
@@ -49,13 +53,19 @@ def print_short(students)
     end
   end
 end
-
-def print_footer(names)
-  puts "Overall, we have #{names.count} great students"
+# 4. print all students using while or until loop
+def printloop(students)
+  i = 0
+  while i < students.count
+    puts "#{students[i][:name]} (#{students[i][:cohort]} cohort)"
+    i += 1
+  end
 end
+# 
 
 students = input_students
-print_header
-print(students)
-print_short(students)
-print_footer(students)
+# print_header
+# print(students)
+# print_short(students)
+# print_footer(students)
+printloop(students)
