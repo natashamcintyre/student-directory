@@ -22,11 +22,13 @@ def print_header
   puts "The students of Villains Academy"
   puts "-------------"
 end
+# 1. print students with number in front of name
 def print(students)
   students.each_with_index do |student,index|
     puts "#{index+1}. #{student[:name]} (#{student[:cohort]} cohort)"
   end
 end
+# 2. prints students whose name begins with certain letter
 def print_initial(students)
   puts "List students whose name begins with: "
   user_input = gets.chomp
@@ -37,6 +39,17 @@ def print_initial(students)
     end
   end
 end
+# 3. prints names less than x characters
+def print_short(students)
+  puts "Find names shorter than how many characters?"
+  max_length = gets.chomp.to_i
+  students.each do |student|
+    if student[:name].length <= max_length
+      puts student[:name]
+    end
+  end
+end
+
 def print_footer(names)
   puts "Overall, we have #{names.count} great students"
 end
@@ -44,5 +57,5 @@ end
 students = input_students
 print_header
 print(students)
-print_initial(students)
+print_short(students)
 print_footer(students)
