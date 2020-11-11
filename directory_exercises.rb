@@ -34,7 +34,13 @@ def input_students
       country: :UK,
       DOB: :unknown
     }
-    puts "Now we have #{students.count} students"
+    # 9. edit statement to change for singular or plural
+    if students.count == 1
+      $singular_or_plural = "student"
+    else
+      $singular_or_plural = "students"
+    end
+    puts "Now we have #{students.count} #{$singular_or_plural}"
     # get another name from the user
     name = gets.chomp.split.map(&:capitalize).join(' ')
   end
@@ -49,7 +55,7 @@ def print_header
   puts "-------------".center($title1.length)
 end
 def print_footer(names)
-  puts "Overall, we have #{names.count} great students"
+  puts "Overall, we have #{names.count} great #{$singular_or_plural}"
 end
 
 # 1. print students with number in front of name
@@ -93,5 +99,5 @@ students = input_students
 print_header
 # print(students)
 # print_short(students)
-# print_footer(students)
 printloop(students)
+print_footer(students)
