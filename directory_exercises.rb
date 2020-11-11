@@ -36,11 +36,11 @@ def input_students
     }
     # 9. edit statement to change for singular or plural
     if students.count == 1
-      $singular_or_plural = "student"
+      $collective = "student"
     else
-      $singular_or_plural = "students"
+      $collective = "students"
     end
-    puts "Now we have #{students.count} #{$singular_or_plural}"
+    puts "Now we have #{students.count} #{$collective}"
     # get another name from the user
     name = gets.chomp.split.map(&:capitalize).join(' ')
   end
@@ -55,7 +55,7 @@ def print_header
   puts "-------------".center($title1.length)
 end
 def print_footer(names)
-  puts "Overall, we have #{names.count} great #{$singular_or_plural}"
+  puts "Overall, we have #{names.count} great #{$collective}"
 end
 
 # 1. print students with number in front of name
@@ -94,6 +94,9 @@ def printloop(students)
   end
 end
 #
+def students_by_cohort
+
+end
 
 students = input_students
 print_header
