@@ -1,17 +1,35 @@
+# cohort list - fixed
+COHORT = [
+  :January, :February, :March, :April, :May, :June,
+  :July, :August, :September, :October, :November, :December
+]
+
 # get list of students from user
 def input_students
-  puts "Please enter the names and cohort of the students"
+  puts "Please enter the name and cohort of each student"
   puts "To finish, just hit return twice"
+  puts "Student name: "
   # create an empty array
   students = []
   # get the first name
   name = gets.chomp.split.map(&:capitalize).join(' ')
   # while the name is not empty, repeat this code
   while !name.empty? do
+    # get student cohort
+    puts "#{name}'s cohort: (or hit return to default to November)"
+    cohort = gets.chomp.capitalize.to_sym
+    if cohort.empty?
+      cohort = :November
+    else
+      while !COHORT.include?(cohort)
+        puts "#{name}'s cohort: (or hit return to default to November)"
+        cohort = gets.chomp.capitalize.to_sym
+      end
+    end
     # add the student hash to the array
     students << {
       name: name,
-      cohort: :november,
+      cohort: cohort,
       hobbies: :reading,
       country: :UK,
       DOB: :unknown
@@ -25,10 +43,10 @@ def input_students
 end
 # print student summary
 def print_header
-  @title1 = "The students of Villains Academy"
-  puts @title1
+  $title1 = "The students of Villains Academy"
+  puts $title1
   # 6. use center to improve output presentation
-  puts "-------------".center(@title1.length)
+  puts "-------------".center($title1.length)
 end
 def print_footer(names)
   puts "Overall, we have #{names.count} great students"
@@ -37,7 +55,7 @@ end
 # 1. print students with number in front of name
 def print(students)
   students.each_with_index do |student,index|
-    puts "#{index+1}. #{student[:name]} (#{student[:cohort]} cohort)".center(@title1.length)
+    puts "#{index+1}. #{student[:name]} (#{student[:cohort]} cohort)".center($title1.length)
   end
 end
 # 2. prints students whose name begins with certain letter
@@ -65,7 +83,7 @@ end
 def printloop(students)
   i = 0
   while i < students.count
-    puts "#{students[i][:name]} (#{students[i][:cohort]} cohort)".center(@title1.length)
+    puts "#{students[i][:name]} (#{students[i][:cohort]} cohort)".center($title1.length)
     i += 1
   end
 end
