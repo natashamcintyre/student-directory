@@ -1,6 +1,6 @@
 # get list of students from user
 def input_students
-  puts "Please enter the names of the students"
+  puts "Please enter the names and cohort of the students"
   puts "To finish, just hit return twice"
   # create an empty array
   students = []
@@ -9,7 +9,7 @@ def input_students
   # while the name is not empty, repeat this code
   while !name.empty? do
     # add the student hash to the array
-    students << {name: name, cohort: :november}
+    students << {name: name, cohort: :november, hobbies: :reading, country: :UK, DOB: :unknown}
     puts "Now we have #{students.count} students"
     # get another name from the user
     name = gets.chomp
@@ -61,7 +61,7 @@ def printloop(students)
     i += 1
   end
 end
-# 
+#
 
 students = input_students
 # print_header
