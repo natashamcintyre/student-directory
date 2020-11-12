@@ -60,8 +60,12 @@ end
 
 # 1. print students with number in front of name
 def print(students)
-  students.each_with_index do |student,index|
-    puts "#{index+1}. #{student[:name]} (#{student[:cohort]} cohort)".center($title1.length)
+  if students.size > 0
+    students.each_with_index do |student,index|
+      puts "#{index+1}. #{student[:name]} (#{student[:cohort]} cohort)".center($title1.length)
+    end
+  else
+    puts "0 students"
   end
 end
 # 2. prints students whose name begins with certain letter
@@ -93,14 +97,65 @@ def printloop(students)
     i += 1
   end
 end
-#
-def students_by_cohort
+# 8. display students by cohort
+def students_by_cohort(students)
+  # new hash for existing cohorts
+  by_cohort = {}
+  # go through students hash and get list of existing cohorts
+  students.each do |student|
+    cohort = student[:cohort]
+    # check to see if cohort is in hash
+    if by_cohort[cohort] == nil
+      by_cohort[cohort] = []
+    end
+    # push student into appropriate array
+    by_cohort[cohort].push(student[:name])
+  end
+  puts by_cohort.to_a
+end
+# Trying to do students by cohort using #inject
+# I'm not sure it works!
+# def students_by_cohort_the_inject_way(student)
+#   puts (
+#     student.inject([]) do |cohorts_list, (key, value)|
+#       cohorts_list << value if key == :cohort
+#       cohorts_list
+#     end
+#   )
+# end
+# add an interactive menu
+def interactive_menu
+
+  loop do
+    # give user options and ask user for input
+    puts "1. Input students"
+    puts "2. Show the students"
+    puts "9. Exit"
+    # save user input in a variable and execute the appropriate task
+    selection = gets.chomp
+    case selection
+      when "1"
+        # input students
+      when "2"
+        # show students
+      when "9"
+        # exit
+      else
+        puts "I don't know what you meant, try again"
+    end
+    # repeat menu
+  end
 
 end
 
+
+# students_by_cohort_the_inject_way(student)
+
 students = input_students
 print_header
-# print(students)
+print(students)
+
 # print_short(students)
-printloop(students)
-print_footer(students)
+# printloop(students)
+# print_footer(students)
+# students_by_cohort(students)
