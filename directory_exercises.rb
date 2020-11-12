@@ -125,7 +125,7 @@ end
 # end
 # add an interactive menu
 def interactive_menu
-
+  students = []
   loop do
     # give user options and ask user for input
     puts "1. Input students"
@@ -136,10 +136,14 @@ def interactive_menu
     case selection
       when "1"
         # input students
+        students = input_students
       when "2"
         # show students
+        print_header
+        print(students)
+        print_footer(students)
       when "9"
-        # exit
+        exit # program terminates
       else
         puts "I don't know what you meant, try again"
     end
@@ -148,14 +152,13 @@ def interactive_menu
 
 end
 
-
+interactive_menu
 # students_by_cohort_the_inject_way(student)
 
-students = input_students
-print_header
-print(students)
+
+
+
 
 # print_short(students)
 # printloop(students)
-# print_footer(students)
 # students_by_cohort(students)
