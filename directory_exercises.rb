@@ -132,22 +132,24 @@ def show_students
   print_footer
 end
 
+def process(selection)
+  case selection
+    when "1"
+      input_students
+    when "2"
+      show_students
+    when "9"
+      exit # program terminates
+    else
+      puts "I don't know what you meant, try again"
+  end
+end
+
 def interactive_menu
   loop do
     print_menu # give user options and ask for input
-    selection = gets.chomp
-    case selection
-      when "1"
-        input_students
-      when "2"
-        show_students
-      when "9"
-        exit # program terminates
-      else
-        puts "I don't know what you meant, try again"
-    end
+    process(gets.chomp)
   end
-
 end
 
 interactive_menu
