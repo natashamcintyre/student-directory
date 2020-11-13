@@ -22,7 +22,7 @@ def print_header
   puts "-------------"
 end
 
-def print(students)
+def print_student_list(students)
   students.each do |student|
     puts "#{student[:name]} (#{student[:cohort]} cohort)"
   end
@@ -35,5 +35,5 @@ end
 
 students = input_students
 print_header
-print(students)
+print_student_list(students)
 print_footer(students)
