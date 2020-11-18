@@ -13,7 +13,7 @@ Program which enables input, saving, loading and displaying of students
 
 Completed ahead of schedule, this task challenged me to not only make use of my newly acquired skills but also gave me the opportunity to further explore different approaches to problems and alternative methods (eg. inject).
 
-The result of both independent work and collaboration, there are many elements to this project of which I am proud - eg. sorting by cohort, my decision to incorporate user feedback, ... - as well as areas upon which I can further improve.
+The result of both independent work and collaboration, there are many elements to this project of which I am proud - eg. sorting by cohort, my decision to incorporate user feedback, learning about Ruby's CSV library - as well as areas upon which I can further improve - eg. refactoring, structuring my code logically and my knowledge of escape sequences.
 
 ## Takeaways ##
 
