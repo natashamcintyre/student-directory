@@ -3,8 +3,8 @@
 def print_menu
   puts "1. Input students"
   puts "2. Show the students"
-  puts "3. Save list to students.csv"
-  puts "4. Load list from students.csv"
+  puts "3. Save list"
+  puts "4. Load list"
   puts "9. Exit"
 end
 
@@ -36,8 +36,8 @@ end
 # 1. input students
 # cohort list - fixed
 COHORT = [
-  :January, :February, :March, :April, :May, :June,
-  :July, :August, :September, :October, :November, :December
+  "January", "February", "March", "April", "May", "June",
+  "July", "August", "September", "October", "November", "December"
 ]
 
 # get list of students from user
@@ -112,26 +112,27 @@ def save_students
   puts "Save as: "
   filename = gets.chomp
   # open a file
-  file = File.open(filename, "w")
-  # iterate over students
-  @students.each do |student|
-    student_data = [student[:name], student[:cohort]]
-    csv_line = student_data.join(",")
-    file.puts csv_line
+  open(filename, "w") do |file|
+    # iterate over students
+    @students.each do |student|
+      student_data = [student[:name], student[:cohort]]
+      csv_line = student_data.join(",")
+      file.puts csv_line
+    end
   end
   puts "#{@students.count} students saved to #{filename}"
-  file.close
 end
+
 
 # 4. load students
 def load_students(filename = STDIN.gets.chomp)
-  file = File.open(filename, "r")
-  file.readlines.each do |line| # readlines creates array of file's lines
-    name, cohort = line.chomp.split(',')
-    add_student(name, cohort)
+  open(filename, "r") do |file|
+    file.readlines.each do |line| # readlines creates array of file's lines
+      name, cohort = line.chomp.split(',')
+      add_student(name, cohort)
+    end
   end
   puts "Loaded #{@students.count} students from #{filename}"
-  file.close
 end
 
 # On startup, check for student list arg entered in commandline
