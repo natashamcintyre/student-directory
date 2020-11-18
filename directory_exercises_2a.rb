@@ -1,3 +1,4 @@
+require 'csv'
 @students = [] # empty array accessible to all methods
 # add an interactive menu
 def print_menu
@@ -112,12 +113,11 @@ def save_students
   puts "Save as: "
   filename = gets.chomp
   # open a file
-  open(filename, "w") do |file|
+  CSV.open(filename, "wb") do |file|
     # iterate over students
     @students.each do |student|
       student_data = [student[:name], student[:cohort]]
-      csv_line = student_data.join(",")
-      file.puts csv_line
+      file << student_data
     end
   end
   puts "#{@students.count} students saved to #{filename}"
@@ -126,11 +126,9 @@ end
 
 # 4. load students
 def load_students(filename = STDIN.gets.chomp)
-  open(filename, "r") do |file|
-    file.readlines.each do |line| # readlines creates array of file's lines
-      name, cohort = line.chomp.split(',')
-      add_student(name, cohort)
-    end
+  CSV.foreach(filename) do |line|
+    name, cohort = line[0], line[1]
+    add_student(name, cohort)
   end
   puts "Loaded #{@students.count} students from #{filename}"
 end
