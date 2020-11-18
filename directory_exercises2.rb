@@ -57,17 +57,15 @@ def get_student_name
 end
 
 def get_student_cohort
-  loop do
-    puts "#{@student_name}'s cohort: (or hit return to default to November)"
-    @student_cohort = STDIN.gets.chomp.capitalize
-    if @student_cohort.empty? # default to November
-      return @student_cohort = :November
-    elsif !COHORT.include?(@student_cohort) # if typo
-      puts "Sorry I didn't catch that. Please try again."
-    else
-      return @student_cohort
-    end
+  puts "#{@student_name}'s cohort: (or hit return to default to November)"
+  @student_cohort = STDIN.gets.chomp.capitalize
+  if @student_cohort.empty? # default to November
+    @student_cohort = :November
+  elsif !COHORT.include?(@student_cohort) # if typo
+    puts "Sorry I didn't catch that. Please try again."
+    get_student_cohort
   end
+  return @student_cohort
 end
 
 def add_student(name, cohort, count = nil)
