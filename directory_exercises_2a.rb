@@ -130,8 +130,9 @@ end
 # On startup, check for student list arg entered in commandline
 def try_to_load_students
   filename = ARGV.first # this is the first argument from the command line
-  return if filename.nil? # get out of the method if not given - then auto loads
-  if File.exists?(filename)
+  if filename.nil?
+    load_students # auto loads students.csv
+  elsif File.exists?(filename)
     load_students(filename)
     puts "Loaded #{@students.count} students from #{filename}"
   else
