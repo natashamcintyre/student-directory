@@ -24,6 +24,7 @@ def get_option(selection)
     when "3"
       save_students
     when "4"
+      puts "What file do you want to open?"
       load_students
     when "9"
       exit # program terminates
@@ -108,26 +109,28 @@ end
 
 # 3. save students to file for future ref
 def save_students
+  puts "Save as: "
+  filename = gets.chomp
   # open a file
-  file = File.open("students.csv", "w")
+  file = File.open(filename, "w")
   # iterate over students
   @students.each do |student|
     student_data = [student[:name], student[:cohort]]
     csv_line = student_data.join(",")
     file.puts csv_line
   end
-  puts "#{@students.count} students saved to students.csv"
+  puts "#{@students.count} students saved to #{filename}"
   file.close
 end
 
 # 4. load students
-def load_students(filename = "students.csv")
+def load_students(filename = STDIN.gets.chomp)
   file = File.open(filename, "r")
   file.readlines.each do |line| # readlines creates array of file's lines
     name, cohort = line.chomp.split(',')
     add_student(name, cohort)
   end
-  puts "Loaded #{@students.count} students from students.csv"
+  puts "Loaded #{@students.count} students from #{filename}"
   file.close
 end
 
@@ -135,7 +138,7 @@ end
 def try_to_load_students
   filename = ARGV.first # this is the first argument from the command line
   if filename.nil?
-    load_students # auto loads students.csv
+    load_students("students.csv") # auto loads students.csv
   elsif File.exists?(filename)
     load_students(filename)
     puts "Loaded #{@students.count} students from #{filename}"
