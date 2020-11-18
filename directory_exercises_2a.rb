@@ -11,11 +11,11 @@ end
 def interactive_menu
   loop do
     print_menu # give user options and ask for input
-    process(STDIN.gets.chomp)
+    get_option(STDIN.gets.chomp)
   end
 end
 
-def process(selection)
+def get_option(selection)
   case selection
     when "1"
       input_students
@@ -43,6 +43,10 @@ COHORT = [
 def input_students
   puts "Please enter the name and cohort of each student"
   puts "To finish, just hit return twice"
+  get_student_details
+end
+
+def get_student_details
   puts "Student name: "
   # get the first name
   name = STDIN.gets.chomp.split.map(&:capitalize).join(' ')
@@ -63,11 +67,11 @@ def input_students
     add_student(name, cohort)
     # 9. edit statement to change for singular or plural
     if @students.count == 1
-      $collective = "student"
+      collective = "student"
     else
-      $collective = "students"
+      collective = "students"
     end
-    puts "Now we have #{@students.count} #{$collective}"
+    puts "Now we have #{@students.count} #{collective}"
     # get another name from the user
     puts "Student name: "
     name = STDIN.gets.chomp.split.map(&:capitalize).join(' ')
